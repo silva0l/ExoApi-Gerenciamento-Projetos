@@ -1,0 +1,47 @@
+@baseUrl = https://localhost:7001
+@token = substituir-pelo-token-retornado-em-api-auth-token
+@demoUser = preencher-usuario-configurado-localmente
+@demoPassword = preencher-senha-configurada-localmente
+
+### Emitir token local de demonstração
+POST {{baseUrl}}/api/auth/token
+Content-Type: application/json
+
+{
+  "usuario": "{{demoUser}}",
+  "senha": "{{demoPassword}}"
+}
+
+### Listar projetos (autenticado)
+GET {{baseUrl}}/api/projetos
+Authorization: Bearer {{token}}
+
+### Criar projeto
+POST {{baseUrl}}/api/projetos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Projeto ExoApi",
+  "descricao": "Projeto inicial",
+  "status": "Planejado"
+}
+
+### Consultar projeto por id
+GET {{baseUrl}}/api/projetos/1
+Authorization: Bearer {{token}}
+
+### Atualizar projeto
+PUT {{baseUrl}}/api/projetos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Projeto ExoApi atualizado",
+  "descricao": "Projeto revisado",
+  "status": "Em andamento"
+}
+
+### Excluir projeto (token precisa ter papel Admin)
+DELETE {{baseUrl}}/api/projetos/1
+Authorization: Bearer {{token}}
